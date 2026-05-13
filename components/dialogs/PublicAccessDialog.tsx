@@ -9,21 +9,29 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Copy, Check, Globe, Code2, Link as LinkIcon } from 'lucide-react';
-import { useState } from 'react';
+import { Copy, Check, Code2, Globe, Link as LinkIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
+import { WebsiteResponse } from '@/lib/types';
 
 interface PublicAccessDialogProps {
-  slug: string;
+  website?: WebsiteResponse;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export function PublicAccessDialog({ slug, isOpen, onClose }: PublicAccessDialogProps) {
+export function PublicAccessDialog({ website, isOpen, onClose }: PublicAccessDialogProps) {
   const [copied, setCopied] = useState(false);
-  const publicUrl = `${window.location.origin}/api/public/websites/${slug}`;
+  const [origin, setOrigin] = useState('');
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  const publicUrl = website ? `${origin}/api/public/websites/${website.slug}` : '';
 
   const copyToClipboard = () => {
+    if (!publicUrl) return;
     navigator.clipboard.writeText(publicUrl);
     setCopied(true);
     toast.success('API endpoint copied to clipboard');
@@ -32,64 +40,68 @@ export function PublicAccessDialog({ slug, isOpen, onClose }: PublicAccessDialog
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden border-none shadow-2xl rounded-[2.5rem]">
-        <div className="bg-primary/5 p-10 border-b border-primary/10 flex items-center gap-6">
-          <div className="p-4 bg-white rounded shadow-xl border border-primary/5">
-            <Code2 className="h-8 w-8 text-primary" />
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-[#F1F3F5] shadow-none rounded">
+        <div className="bg-[#F8F9FA] p-6 border-b border-[#F1F3F5] flex items-center gap-4">
+          <div className="h-10 w-10 bg-white rounded border border-[#F1F3F5] flex items-center justify-center">
+            <Code2 className="h-5 w-5 text-[#212529]" />
           </div>
           <div>
-            <DialogTitle className="text-3xl font-black tracking-tight text-foreground">API Integration</DialogTitle>
-            <DialogDescription className="text-muted-foreground font-semibold text-base mt-1">
-              Access your platform data programmatically using its unique slug.
+            <DialogTitle className="text-lg font-semibold text-[#212529]">API Integration</DialogTitle>
+            <DialogDescription className="text-xs font-medium text-[#868E96] mt-0.5">
+              Access your platform data programmatically.
             </DialogDescription>
           </div>
         </div>
 
-        <div className="p-10 space-y-10">
-          <div className="space-y-4">
-            <label className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground/70 flex items-center gap-2">
+        <div className="p-6 space-y-6">
+          <div className="space-y-2">
+            <label className="text-xs font-medium text-[#868E96] flex items-center gap-1.5">
               <LinkIcon className="h-3 w-3" />
-              Public Endpoint URL
+              Public endpoint URL
             </label>
-            <div className="relative group">
+            <div className="flex gap-2">
               <Input 
                 value={publicUrl} 
                 readOnly 
-                className="pr-16 h-16 rounded bg-muted/50 border-none font-mono text-sm group-hover:bg-muted transition-colors"
+                className="h-8 rounded bg-[#F8F9FA] border-[#F1F3F5] font-mono text-[11px] placeholder:text-[#CED4DA]"
               />
               <Button 
-                size="icon" 
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-12 w-12 rounded bg-primary shadow-lg shadow-primary/20"
+                size="sm" 
+                className="h-8 px-3 rounded bg-[#212529] text-white shadow-none"
                 onClick={copyToClipboard}
               >
-                {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+                {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               </Button>
             </div>
           </div>
 
-          <div className="bg-slate-900 rounded-[2rem] p-8 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">JSON Example</span>
-               <div className="flex gap-1.5">
-                  <div className="h-2 w-2 rounded-full bg-rose-500" />
-                  <div className="h-2 w-2 rounded-full bg-amber-500" />
-                  <div className="h-2 w-2 rounded-full bg-emerald-500" />
+          <div className="bg-[#212529] rounded p-4 space-y-3">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2">
+               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#ADB5BD]">Request example</span>
+               <div className="flex gap-1">
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#495057]" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#495057]" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#495057]" />
                </div>
             </div>
-            <pre className="text-sm font-mono text-emerald-400 overflow-x-auto whitespace-pre-wrap leading-relaxed">
-{`// Fetch by slug
+            <pre className="text-[11px] font-mono text-emerald-400 overflow-x-auto whitespace-pre-wrap leading-relaxed">
+{`// Fetch platform data
 const res = await fetch('${publicUrl}');
 const { data } = await res.json();
 
-console.log(data.sections); // Array of live sections
-console.log(data.teamMembers); // Array of active team`}
+console.log(data.sections); // sections array
+console.log(data.teamMembers); // team members array`}
             </pre>
           </div>
 
-          <Button variant="outline" className="w-full h-14 rounded border-primary/20 font-bold text-primary hover:bg-primary/5 gap-2" asChild>
+          <Button 
+            variant="outline" 
+            className="w-full h-8 rounded border-[#F1F3F5] font-semibold text-xs text-[#495057] hover:bg-[#F8F9FA] gap-2 shadow-none" 
+            asChild
+          >
             <a href={publicUrl} target="_blank" rel="noopener noreferrer">
-              <Globe className="h-5 w-5" />
-              Preview JSON Response
+              <Globe className="h-3.5 w-3.5" />
+              Preview JSON response
             </a>
           </Button>
         </div>
