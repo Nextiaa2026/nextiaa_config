@@ -1,4 +1,4 @@
-import { NextAuthOptions, DefaultSession, User as NextAuthUser } from 'next-auth';
+import { NextAuthOptions, DefaultSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { db } from '@/lib/db';
@@ -15,9 +15,12 @@ declare module 'next-auth' {
     } & DefaultSession['user'];
   }
 
-  interface User extends NextAuthUser {
+  interface User {
     id: string;
     role: string;
+    email?: string | null;
+    name?: string | null;
+    image?: string | null;
   }
 }
 

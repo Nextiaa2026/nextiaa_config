@@ -31,6 +31,21 @@ export const useCreateSection = (websiteId: string) => {
   });
 };
 
+export const useUpdateSection = (websiteId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...values }: Partial<SectionResponse> & { id: string }) => {
+      const { data } = await api.patch(`/websites/${websiteId}/sections/${id}`, values);
+      return data.data as SectionResponse;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['sections', websiteId] });
+      toast.success('Section updated successfully');
+    },
+    onError: () => toast.error('Failed to update section'),
+  });
+};
+
 // --- Services Hooks ---
 
 export const useServices = (websiteId: string) => {
@@ -59,6 +74,21 @@ export const useCreateService = (websiteId: string) => {
   });
 };
 
+export const useUpdateService = (websiteId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...values }: Partial<ServiceResponse> & { id: string }) => {
+      const { data } = await api.patch(`/websites/${websiteId}/services/${id}`, values);
+      return data.data as ServiceResponse;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['services', websiteId] });
+      toast.success('Service updated successfully');
+    },
+    onError: () => toast.error('Failed to update service'),
+  });
+};
+
 // --- Team Members Hooks ---
 
 export const useTeamMembers = (websiteId: string) => {
@@ -84,6 +114,21 @@ export const useCreateTeamMember = (websiteId: string) => {
       toast.success('Team member registered successfully');
     },
     onError: () => toast.error('Failed to register team member'),
+  });
+};
+
+export const useUpdateTeamMember = (websiteId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, ...values }: Partial<TeamMemberResponse> & { id: string }) => {
+      const { data } = await api.patch(`/websites/${websiteId}/team/${id}`, values);
+      return data.data as TeamMemberResponse;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['team', websiteId] });
+      toast.success('Profile updated successfully');
+    },
+    onError: () => toast.error('Failed to update profile'),
   });
 };
 

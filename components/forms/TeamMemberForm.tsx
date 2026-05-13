@@ -14,9 +14,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { useCreateTeamMember } from '@/hooks/useWebsiteManagement';
+import { useCreateTeamMember, useUpdateTeamMember } from '@/hooks/useWebsiteManagement';
 import { Loader2 } from 'lucide-react';
 import { ImageUpload } from '@/components/ui/image-upload';
+import { TeamMemberResponse } from '@/lib/types';
 
 const teamMemberSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -29,26 +30,34 @@ type TeamMemberFormData = z.infer<typeof teamMemberSchema>;
 
 interface TeamMemberFormProps {
   websiteId: string;
+  initialData?: TeamMemberResponse;
   onSuccess?: () => void;
 }
 
-export function TeamMemberForm({ websiteId, onSuccess }: TeamMemberFormProps) {
+export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMemberFormProps) {
   const createMutation = useCreateTeamMember(websiteId);
+  const updateMutation = useUpdateTeamMember(websiteId);
 
   const form = useForm<TeamMemberFormData>({
     resolver: zodResolver(teamMemberSchema),
     defaultValues: {
-      name: '',
-      role: '',
-      bio: '',
-      image: '',
+      name: initialData?.name || '',
+      role: initialData?.role || '',
+      bio: initialData?.bio || '',
+      image: initialData?.image || '',
     },
   });
 
   const onSubmit = async (values: TeamMemberFormData) => {
-    await createMutation.mutateAsync(values);
+    if (initialData) {
+      await updateMutation.mutateAsync({ id: initialData.id, ...values });
+    } else {
+      await createMutation.mutateAsync(values);
+    }
     onSuccess?.();
   };
+
+  const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
     <Form {...form}>
@@ -120,11 +129,11 @@ export function TeamMemberForm({ websiteId, onSuccess }: TeamMemberFormProps) {
         <div className="flex justify-end pt-4">
           <Button 
             type="submit" 
-            disabled={createMutation.isPending} 
+            disabled={isLoading} 
             className="px-8 rounded font-semibold text-xs shadow-none"
           >
-            {createMutation.isPending && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
-            Save profile
+            {isLoading && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
+            {initialData ? 'Save changes' : 'Save profile'}
           </Button>
         </div>
       </form>

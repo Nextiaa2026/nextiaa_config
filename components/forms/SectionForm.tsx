@@ -15,8 +15,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCreateSection } from '@/hooks/useWebsiteManagement';
+import { useCreateSection, useUpdateSection } from '@/hooks/useWebsiteManagement';
 import { Loader2 } from 'lucide-react';
+import { SectionResponse } from '@/lib/types';
 
 const sectionSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -29,26 +30,34 @@ type SectionFormData = z.infer<typeof sectionSchema>;
 
 interface SectionFormProps {
   websiteId: string;
+  initialData?: SectionResponse;
   onSuccess?: () => void;
 }
 
-export function SectionForm({ websiteId, onSuccess }: SectionFormProps) {
+export function SectionForm({ websiteId, initialData, onSuccess }: SectionFormProps) {
   const createMutation = useCreateSection(websiteId);
+  const updateMutation = useUpdateSection(websiteId);
 
   const form = useForm<SectionFormData>({
     resolver: zodResolver(sectionSchema),
     defaultValues: {
-      title: '',
-      subtitle: '',
-      content: '',
-      type: 'text',
+      title: initialData?.title || '',
+      subtitle: initialData?.subtitle || '',
+      content: initialData?.content || '',
+      type: initialData?.type || 'text',
     },
   });
 
   const onSubmit = async (values: SectionFormData) => {
-    await createMutation.mutateAsync(values);
+    if (initialData) {
+      await updateMutation.mutateAsync({ id: initialData.id, ...values });
+    } else {
+      await createMutation.mutateAsync(values);
+    }
     onSuccess?.();
   };
+
+  const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
     <Form {...form}>
@@ -129,11 +138,11 @@ export function SectionForm({ websiteId, onSuccess }: SectionFormProps) {
         <div className="flex justify-end pt-4">
           <Button 
             type="submit" 
-            disabled={createMutation.isPending} 
+            disabled={isLoading} 
             className="px-8 rounded font-semibold text-xs shadow-none"
           >
-            {createMutation.isPending && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
-            Deploy section
+            {isLoading && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
+            {initialData ? 'Save changes' : 'Deploy section'}
           </Button>
         </div>
       </form>

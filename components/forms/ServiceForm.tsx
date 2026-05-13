@@ -14,8 +14,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { useCreateService } from '@/hooks/useWebsiteManagement';
+import { useCreateService, useUpdateService } from '@/hooks/useWebsiteManagement';
 import { Loader2 } from 'lucide-react';
+import { ServiceResponse } from '@/lib/types';
 
 const serviceSchema = z.object({
   name: z.string().min(1, 'Service name is required'),
@@ -28,26 +29,34 @@ type ServiceFormData = z.infer<typeof serviceSchema>;
 
 interface ServiceFormProps {
   websiteId: string;
+  initialData?: ServiceResponse;
   onSuccess?: () => void;
 }
 
-export function ServiceForm({ websiteId, onSuccess }: ServiceFormProps) {
+export function ServiceForm({ websiteId, initialData, onSuccess }: ServiceFormProps) {
   const createMutation = useCreateService(websiteId);
+  const updateMutation = useUpdateService(websiteId);
 
   const form = useForm<ServiceFormData>({
     resolver: zodResolver(serviceSchema),
     defaultValues: {
-      name: '',
-      description: '',
-      price: '',
-      icon: 'Zap',
+      name: initialData?.name || '',
+      description: initialData?.description || '',
+      price: initialData?.price || '',
+      icon: initialData?.icon || 'Zap',
     },
   });
 
   const onSubmit = async (values: ServiceFormData) => {
-    await createMutation.mutateAsync(values);
+    if (initialData) {
+      await updateMutation.mutateAsync({ id: initialData.id, ...values });
+    } else {
+      await createMutation.mutateAsync(values);
+    }
     onSuccess?.();
   };
+
+  const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
     <Form {...form}>
@@ -102,11 +111,11 @@ export function ServiceForm({ websiteId, onSuccess }: ServiceFormProps) {
         <div className="flex justify-end pt-4">
           <Button 
             type="submit" 
-            disabled={createMutation.isPending} 
+            disabled={isLoading} 
             className="px-8 rounded font-semibold text-xs shadow-none"
           >
-            {createMutation.isPending && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
-            Create service
+            {isLoading && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
+            {initialData ? 'Save changes' : 'Create service'}
           </Button>
         </div>
       </form>
