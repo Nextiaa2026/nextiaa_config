@@ -8,6 +8,13 @@
       "when": 1778635230480,
       "tag": "0000_fuzzy_dark_phoenix",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781879824485,
+      "tag": "0001_jazzy_christian_walker",
+      "breakpoints": true
     }
   ]
 }

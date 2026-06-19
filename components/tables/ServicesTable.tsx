@@ -27,7 +27,7 @@ interface ServicesTableProps {
 export function ServicesTable({ services, onEdit, onDelete }: ServicesTableProps) {
   if (!services.length) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 gap-4 bg-white border border-[#F1F3F5] rounded">
+      <div className="flex flex-col items-center justify-center py-24 gap-4 bg-white border border-[#F1F3F5] rounded-lg">
         <Briefcase className="h-10 w-10 text-[#CED4DA]" />
         <p className="text-[#868E96] font-medium text-sm">no services found.</p>
       </div>
@@ -35,15 +35,15 @@ export function ServicesTable({ services, onEdit, onDelete }: ServicesTableProps
   }
 
   return (
-    <div className="rounded overflow-hidden border border-[#F1F3F5] bg-white">
+    <div className="rounded-lg overflow-hidden border border-[#F1F3F5] bg-white">
       <div className="overflow-x-auto">
         <Table>
           <TableHeader className="bg-white">
             <TableRow className="hover:bg-transparent border-b-[#F1F3F5]">
-              <TableHead className="py-4 px-6 text-sm font-medium text-[#212529]">offering</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">pricing</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">description</TableHead>
-              <TableHead className="text-right px-6 text-sm font-medium text-[#212529]">actions</TableHead>
+              <TableHead className="py-4 px-6">Offering</TableHead>
+              <TableHead>Pricing</TableHead>
+              <TableHead>Description</TableHead>
+              <TableHead className="text-right px-6">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -54,11 +54,11 @@ export function ServicesTable({ services, onEdit, onDelete }: ServicesTableProps
                     <div className="h-9 w-9 rounded bg-[#F8F9FA] flex items-center justify-center border border-[#F1F3F5]">
                       {iconMap[service.icon as keyof typeof iconMap] || <Briefcase className="h-4 w-4 text-[#495057]" />}
                     </div>
-                    <span className="font-semibold text-[#212529] text-sm">{service.name.toLowerCase()}</span>
+                    <span className="font-medium text-[#212529] text-sm">{service.name.toLowerCase()}</span>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Badge variant="outline" className="bg-[#F8F9FA] text-[#495057] border-[#F1F3F5] font-semibold text-[10px] shadow-none rounded">
+                  <Badge variant="outline" className="bg-[#F8F9FA] text-[#495057] border-[#F1F3F5] font-medium text-[10px] shadow-none rounded">
                     {service.price?.toLowerCase() || 'free'}
                   </Badge>
                 </TableCell>

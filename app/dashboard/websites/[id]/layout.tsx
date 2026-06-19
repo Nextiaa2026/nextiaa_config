@@ -26,7 +26,7 @@ export default function WebsiteManagementLayout({
   if (!website) {
     return (
       <div className="container py-20 text-center">
-        <h1 className="text-3xl font-bold text-destructive">Platform not found</h1>
+        <h1 className="text-3xl font-medium text-destructive">Platform not found</h1>
       </div>
     );
   }

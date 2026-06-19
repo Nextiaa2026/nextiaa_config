@@ -29,8 +29,8 @@ export default function WebsiteOverviewPage() {
           <Card key={stat.name} className="border border-[#F1F3F5] bg-white rounded overflow-hidden group shadow-none">
             <CardContent className="p-6 flex items-center justify-between">
               <div className="space-y-0.5">
-                <p className="text-[11px] font-semibold text-[#ADB5BD]">{stat.name}</p>
-                <h3 className="text-2xl font-semibold text-[#212529]">{stat.value}</h3>
+                <p className="text-[11px] font-medium text-[#ADB5BD]">{stat.name}</p>
+                <h3 className="text-2xl font-medium text-[#212529]">{stat.value}</h3>
               </div>
               <div className={cn('h-9 w-9 rounded flex items-center justify-center', stat.bg)}>
                 <stat.icon className={cn('h-4 w-4', stat.color)} />
@@ -44,7 +44,7 @@ export default function WebsiteOverviewPage() {
         <Card className="border border-[#F1F3F5] bg-white rounded overflow-hidden shadow-none">
           <CardHeader className="p-6 pb-0">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-semibold flex items-center gap-2 text-[#212529]">
+              <CardTitle className="text-base font-medium flex items-center gap-2 text-[#212529]">
                 <Activity className="h-4 w-4 text-emerald-500" />
                 live status
               </CardTitle>
@@ -52,7 +52,7 @@ export default function WebsiteOverviewPage() {
                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded hover:bg-[#F8F9FA]" onClick={() => setIsEditDialogOpen(true)}>
                   <Edit3 className="h-4 w-4 text-[#868E96]" />
                 </Button>
-                <Button variant="ghost" size="sm" className="h-8 rounded px-3 font-semibold text-xs gap-2 hover:bg-[#F8F9FA]" asChild>
+                <Button variant="ghost" size="sm" className="h-8 rounded px-3 font-medium text-xs gap-2 hover:bg-[#F8F9FA]" asChild>
                   <a href={website?.url} target="_blank" rel="noopener noreferrer">
                     visit platform <ArrowUpRight className="h-3 w-3" />
                   </a>
@@ -66,17 +66,17 @@ export default function WebsiteOverviewPage() {
                  <ShieldCheck className="h-4 w-4 text-white" />
                </div>
                <div>
-                 <p className="font-semibold text-sm text-[#212529]">platform operational</p>
+                 <p className="font-medium text-sm text-[#212529]">platform operational</p>
                  <p className="text-[#868E96] font-medium text-[10px]">real-time verified</p>
                </div>
             </div>
 
             <div className="space-y-2">
-              <div className="flex justify-between items-center text-[10px] font-semibold text-[#ADB5BD]">
+              <div className="flex justify-between items-center text-[10px] font-medium text-[#ADB5BD]">
                 <span>domain verification</span>
                 <span className="text-emerald-500">active</span>
               </div>
-              <div className="h-1.5 w-full bg-[#F1F3F5] rounded-full overflow-hidden">
+              <div className="h-1.5 w-full bg-[#F1F3F5] rounded overflow-hidden">
                 <div className="h-full bg-emerald-500 w-[95%]" />
               </div>
             </div>
@@ -85,30 +85,30 @@ export default function WebsiteOverviewPage() {
 
         <Card className="border border-[#F1F3F5] bg-white rounded overflow-hidden shadow-none">
           <CardHeader className="p-6 pb-0">
-            <CardTitle className="text-base font-semibold flex items-center gap-2 text-[#212529]">
+            <CardTitle className="text-base font-medium flex items-center gap-2 text-[#212529]">
               <BarChart3 className="h-4 w-4 text-[#212529]" />
               quick actions
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 grid grid-cols-2 gap-3">
-             <Link href={`/dashboard/websites/${websiteId}/sections`} className="flex flex-col items-center justify-center p-5 bg-[#F8F9FA] rounded border border-[#F1F3F5] hover:bg-[#212529] hover:text-white transition-all group">
+             <Link href={`/dashboard/websites/${websiteId}/sections`} className="flex flex-col items-center justify-center p-5 bg-white rounded border hover:bg-primary hover:text-primary-foreground transition-all group">
                 <Layers className="h-4 w-4 mb-2" />
-                <span className="font-semibold text-[10px]">add section</span>
+                <span className="font-medium text-[10px]">add section</span>
              </Link>
-             <Link href={`/dashboard/websites/${websiteId}/team`} className="flex flex-col items-center justify-center p-5 bg-[#F8F9FA] rounded border border-[#F1F3F5] hover:bg-[#212529] hover:text-white transition-all group">
+             <Link href={`/dashboard/websites/${websiteId}/team`} className="flex flex-col items-center justify-center p-5 bg-white rounded border hover:bg-primary hover:text-primary-foreground transition-all group">
                 <Users className="h-4 w-4 mb-2" />
-                <span className="font-semibold text-[10px]">invite member</span>
+                <span className="font-medium text-[10px]">invite member</span>
              </Link>
-             <Link href={`/dashboard/websites/${websiteId}/services`} className="flex flex-col items-center justify-center p-5 bg-[#F8F9FA] rounded border border-[#F1F3F5] hover:bg-[#212529] hover:text-white transition-all group">
+             <Link href={`/dashboard/websites/${websiteId}/services`} className="flex flex-col items-center justify-center p-5 bg-white rounded border hover:bg-primary hover:text-primary-foreground transition-all group">
                 <Briefcase className="h-4 w-4 mb-2" />
-                <span className="font-semibold text-[10px]">create service</span>
+                <span className="font-medium text-[10px]">create service</span>
              </Link>
              <button 
                 onClick={() => setIsEditDialogOpen(true)}
-                className="flex flex-col items-center justify-center p-5 bg-[#F8F9FA] rounded border border-[#F1F3F5] hover:bg-[#212529] hover:text-white transition-all group"
+                className="flex flex-col items-center justify-center p-5 bg-white rounded border hover:bg-primary hover:text-primary-foreground transition-all group"
              >
                 <Settings className="h-4 w-4 mb-2" />
-                <span className="font-semibold text-[10px]">config</span>
+                <span className="font-medium text-[10px]">config</span>
              </button>
           </CardContent>
         </Card>

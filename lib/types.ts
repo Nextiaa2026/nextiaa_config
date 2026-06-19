@@ -57,8 +57,15 @@ export interface TeamMemberResponse {
   websiteId: string;
   name: string;
   role: string;
+  email?: string;
+  phone?: string;
+  department?: string;
+  location?: string;
   bio?: string;
   image?: string;
+  linkedIn?: string;
+  twitter?: string;
+  github?: string;
   socialLinks?: string;
   order: number;
   isActive: boolean;

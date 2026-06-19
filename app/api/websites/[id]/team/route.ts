@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { teamMembers } from '@/lib/db/schema';
-import { eq, and } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
@@ -37,7 +37,22 @@ export async function POST(
 
     const { id: websiteId } = await params;
     const body = await request.json();
-    const { name, role, bio, image, socialLinks, isActive, order } = body;
+    const {
+      name,
+      role,
+      email,
+      phone,
+      department,
+      location,
+      bio,
+      image,
+      linkedIn,
+      twitter,
+      github,
+      socialLinks,
+      isActive,
+      order,
+    } = body;
 
     const result = await db
       .insert(teamMembers)
@@ -45,8 +60,15 @@ export async function POST(
         websiteId,
         name,
         role,
+        email,
+        phone,
+        department,
+        location,
         bio,
         image,
+        linkedIn,
+        twitter,
+        github,
         socialLinks,
         isActive: isActive ?? true,
         order: order ?? 0,

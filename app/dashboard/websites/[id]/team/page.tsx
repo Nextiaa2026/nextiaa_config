@@ -36,12 +36,12 @@ export default function TeamPage() {
 
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-500">
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white border border-[#F1F3F5] p-2 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between z-50">
-        <div className="flex gap-1 bg-[#F8F9FA] p-1 rounded-full">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white border border-[#F1F3F5] p-2 rounded shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between z-50">
+        <div className="flex gap-1 bg-[#F8F9FA] p-1 rounded">
           <Button 
             variant={viewMode === 'grid' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="rounded-full h-9 px-4 shadow-none text-xs font-semibold"
+            className="rounded h-9 px-4 shadow-none text-xs font-medium"
             onClick={() => setViewMode('grid')}
           >
             <LayoutGrid className="h-4 w-4 mr-2" />
@@ -50,7 +50,7 @@ export default function TeamPage() {
           <Button 
             variant={viewMode === 'table' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="rounded-full h-9 px-4 shadow-none text-xs font-semibold"
+            className="rounded h-9 px-4 shadow-none text-xs font-medium"
             onClick={() => setViewMode('table')}
           >
             <List className="h-4 w-4 mr-2" />
@@ -60,7 +60,7 @@ export default function TeamPage() {
 
         <Button 
           onClick={() => setDialogState({ isOpen: true })}
-          className="h-10 px-5 rounded-full font-semibold bg-[#212529] text-white transition-all active:scale-[0.98] text-sm flex items-center"
+          className="h-10 px-5 rounded font-medium text-sm flex items-center"
         >
           <span className="hidden sm:inline mr-2">Ajouter</span>
           <UserPlus className="h-5 w-5" />
@@ -94,13 +94,13 @@ export default function TeamPage() {
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
                 </div>
-                <Badge variant="outline" className={cn("absolute top-3 left-3 rounded font-semibold text-[10px] border-none shadow-none", member.isActive ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-500")}>
+                <Badge variant="outline" className={cn("absolute top-3 left-3 rounded font-medium text-[10px] border-none shadow-none", member.isActive ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-500")}>
                   {member.isActive ? "Actif" : "Archivé"}
                 </Badge>
               </div>
               <CardHeader className="p-5">
                 <div className="space-y-0.5">
-                  <CardTitle className="text-base font-semibold text-[#212529]">{member.name}</CardTitle>
+                  <CardTitle className="text-base font-medium text-[#212529]">{member.name}</CardTitle>
                   <p className="text-[#868E96] font-medium text-[11px]">{member.role}</p>
                 </div>
                 <CardDescription className="text-xs mt-3 line-clamp-2 leading-relaxed text-[#495057] font-medium">
@@ -118,7 +118,7 @@ export default function TeamPage() {
               <Plus className="h-5 w-5 text-[#CED4DA]" />
             </div>
             <div className="text-center">
-              <p className="font-semibold text-xs text-[#495057]">Ajouter un nouveau membre</p>
+              <p className="font-medium text-xs text-[#495057]">Ajouter un nouveau membre</p>
               <p className="text-[10px] text-[#ADB5BD] mt-1 font-medium">Rejoindre l'équipe</p>
             </div>
           </button>

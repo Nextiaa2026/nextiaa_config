@@ -49,11 +49,11 @@ export function ImageUpload({ value, onChange, className, label }: ImageUploadPr
 
   return (
     <div className={cn('space-y-4', className)}>
-      {label && <label className="text-sm font-bold text-foreground/70">{label}</label>}
+      {label && <label className="text-sm font-medium text-foreground/70">{label}</label>}
       
       <div 
         className={cn(
-          'relative h-48 w-full rounded-[2rem] border-2 border-dashed flex flex-col items-center justify-center transition-all overflow-hidden bg-muted/30 group',
+          'relative h-48 w-full rounded border-2 border-dashed flex flex-col items-center justify-center transition-all overflow-hidden bg-muted/30 group',
           preview ? 'border-primary/20' : 'border-primary/10 hover:border-primary/40'
         )}
       >
@@ -65,7 +65,7 @@ export function ImageUpload({ value, onChange, className, label }: ImageUploadPr
                 type="button" 
                 variant="destructive" 
                 size="icon" 
-                className="rounded-full h-12 w-12"
+                className="rounded h-12 w-12"
                 onClick={removeImage}
               >
                 <X className="h-6 w-6" />
@@ -81,7 +81,7 @@ export function ImageUpload({ value, onChange, className, label }: ImageUploadPr
               <UploadCloud className="h-7 w-7 text-primary" />
             </div>
             <div className="text-center">
-              <p className="font-bold text-primary/80">Click to upload</p>
+              <p className="font-medium text-primary/80">Click to upload</p>
               <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mt-1">SVG, PNG, JPG or GIF</p>
             </div>
           </div>

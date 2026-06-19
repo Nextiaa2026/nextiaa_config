@@ -112,7 +112,7 @@ export function ServiceForm({ websiteId, initialData, onSuccess }: ServiceFormPr
           <Button 
             type="submit" 
             disabled={isLoading} 
-            className="px-8 rounded font-semibold text-xs shadow-none"
+            className="px-8 rounded font-medium text-xs shadow-none"
           >
             {isLoading && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
             {initialData ? 'Save changes' : 'Create service'}

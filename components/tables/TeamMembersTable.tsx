@@ -21,7 +21,7 @@ interface TeamMembersTableProps {
 export function TeamMembersTable({ members, onEdit, onDelete }: TeamMembersTableProps) {
   if (!members.length) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 gap-4 bg-white border border-[#F1F3F5] rounded">
+      <div className="flex flex-col items-center justify-center py-24 gap-4 bg-white border border-[#F1F3F5] rounded-lg">
         <Monitor className="h-10 w-10 text-[#CED4DA]" />
         <p className="text-[#868E96] font-medium text-sm">aucun membre d'équipe trouvé.</p>
       </div>
@@ -29,17 +29,18 @@ export function TeamMembersTable({ members, onEdit, onDelete }: TeamMembersTable
   }
 
   return (
-    <div className="rounded overflow-hidden border border-[#F1F3F5] bg-white">
+    <div className="rounded-lg overflow-hidden border border-[#F1F3F5] bg-white">
       <div className="overflow-x-auto">
         <Table>
           <TableHeader className="bg-white">
             <TableRow className="hover:bg-transparent border-b-[#F1F3F5]">
-              <TableHead className="py-4 px-6 text-sm font-medium text-[#212529]">membre</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">rôle</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">ordre</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">réseaux</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">statut</TableHead>
-              <TableHead className="text-right px-6 text-sm font-medium text-[#212529]">actions</TableHead>
+              <TableHead className="py-4 px-6">Member</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Department</TableHead>
+              <TableHead>Social</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right px-6">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -51,23 +52,26 @@ export function TeamMembersTable({ members, onEdit, onDelete }: TeamMembersTable
                       {member.image ? (
                         <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
                       ) : (
-                        <span className="font-semibold text-xs text-[#ADB5BD]">{member.name.charAt(0).toLowerCase()}</span>
+                        <span className="font-medium text-xs text-[#ADB5BD]">{member.name.charAt(0).toLowerCase()}</span>
                       )}
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-semibold text-[#212529] text-sm">{member.name.toLowerCase()}</span>
+                      <span className="font-medium text-[#212529] text-sm">{member.name.toLowerCase()}</span>
                       <span className="text-[10px] text-[#ADB5BD] truncate max-w-[200px]">{member.bio?.toLowerCase() || 'aucune bio'}</span>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="font-semibold text-xs text-[#495057]">{member.role.toLowerCase()}</span>
+                  <span className="font-medium text-xs text-[#495057]">{member.role.toLowerCase()}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="font-semibold text-xs text-[#495057]">{member.order}</span>
+                  <span className="font-medium text-xs text-[#495057]">{member.email?.toLowerCase() || '—'}</span>
                 </TableCell>
                 <TableCell>
-                  {member.socialLinks ? (
+                  <span className="font-medium text-xs text-[#495057]">{member.department?.toLowerCase() || '—'}</span>
+                </TableCell>
+                <TableCell>
+                  {(member.linkedIn || member.twitter || member.github || member.socialLinks) ? (
                     <span className="text-xs text-blue-500 font-medium">Lié</span>
                   ) : (
                     <span className="text-xs text-[#ADB5BD]">Aucun</span>

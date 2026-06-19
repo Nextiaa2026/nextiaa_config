@@ -47,7 +47,7 @@ export default function ServicesPage() {
           <Button 
             variant={viewMode === 'grid' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="rounded h-8 px-2 md:px-3 shadow-none text-xs font-semibold"
+            className="rounded h-8 px-2 md:px-3 shadow-none text-xs font-medium"
             onClick={() => setViewMode('grid')}
           >
             <LayoutGrid className="h-4 w-4 md:mr-2" />
@@ -56,7 +56,7 @@ export default function ServicesPage() {
           <Button 
             variant={viewMode === 'table' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="rounded h-8 px-2 md:px-3 shadow-none text-xs font-semibold"
+            className="rounded h-8 px-2 md:px-3 shadow-none text-xs font-medium"
             onClick={() => setViewMode('table')}
           >
             <List className="h-4 w-4 md:mr-2" />
@@ -66,7 +66,7 @@ export default function ServicesPage() {
 
         <Button 
           onClick={() => setDialogState({ isOpen: true })}
-          className="h-8 px-3 md:px-6 rounded font-semibold bg-[#212529] text-white transition-all active:scale-[0.98] text-xs md:text-sm"
+          className="h-8 px-3 md:px-6 rounded font-medium text-xs md:text-sm"
         >
           <Plus className="h-4 w-4 md:mr-2" />
           <span className="hidden md:inline">Add service</span>
@@ -81,7 +81,7 @@ export default function ServicesPage() {
                 <div className="h-12 w-12 rounded bg-white flex items-center justify-center shadow-sm border border-[#F1F3F5]">
                   {iconMap[service.icon as keyof typeof iconMap] || <Briefcase className="h-6 w-6 text-[#495057]" />}
                 </div>
-                <Badge variant="outline" className="rounded font-semibold text-[10px] bg-white border-[#F1F3F5] text-[#212529] shadow-none">
+                <Badge variant="outline" className="rounded font-medium text-[10px] bg-white border-[#F1F3F5] text-[#212529] shadow-none">
                   {service.price || 'Free'}
                 </Badge>
                 
@@ -98,7 +98,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <CardHeader className="p-5">
-                <CardTitle className="text-base font-semibold text-[#212529]">{service.name}</CardTitle>
+                <CardTitle className="text-base font-medium text-[#212529]">{service.name}</CardTitle>
                 <CardDescription className="text-xs mt-3 line-clamp-2 leading-relaxed text-[#495057] font-medium">
                   {service.description || "No description provided."}
                 </CardDescription>
@@ -114,7 +114,7 @@ export default function ServicesPage() {
               <Plus className="h-5 w-5 text-[#CED4DA]" />
             </div>
             <div className="text-center">
-              <p className="font-semibold text-xs text-[#495057]">Add new service</p>
+              <p className="font-medium text-xs text-[#495057]">Add new service</p>
               <p className="text-[10px] text-[#ADB5BD] mt-1 font-medium">Grow your offerings</p>
             </div>
           </button>

@@ -21,14 +21,14 @@ export default function WebsitesPage() {
 
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white border border-[#F1F3F5] p-5 rounded">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="relative flex-1 w-full max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#ADB5BD]" />
           <Input
             placeholder="Search platforms..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 h-8 bg-[#F8F9FA] border-[#F1F3F5] rounded text-xs font-medium"
+            className="pl-10 h-8 rounded text-xs font-medium"
           />
         </div>
         
@@ -37,7 +37,7 @@ export default function WebsitesPage() {
             value={status} 
             onValueChange={(val) => setStatus(val || 'all')}
           >
-            <SelectTrigger className="w-full md:w-[160px] h-8 bg-[#F8F9FA] border-[#F1F3F5] rounded">
+            <SelectTrigger className="w-full md:w-[160px] h-8 rounded">
               <div className="flex items-center gap-2">
                 <Filter className="h-3.5 w-3.5 text-[#ADB5BD]" />
                 <SelectValue placeholder="Status" />
@@ -53,7 +53,7 @@ export default function WebsitesPage() {
           
           <Button 
             onClick={() => setIsDialogOpen(true)}
-            className="h-8 px-4 rounded bg-[#212529] text-white font-semibold text-xs transition-all active:scale-[0.98]"
+            className="h-8 px-4 rounded font-medium text-xs"
           >
             <Plus className="h-3.5 w-3.5 mr-1.5" />
             Add platform
@@ -61,9 +61,7 @@ export default function WebsitesPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded border border-[#F1F3F5] overflow-hidden">
-        <WebsitesTable status={status === 'all' ? '' : status} search={search} />
-      </div>
+      <WebsitesTable status={status === 'all' ? '' : status} search={search} />
 
       <WebsiteDialog 
         isOpen={isDialogOpen} 

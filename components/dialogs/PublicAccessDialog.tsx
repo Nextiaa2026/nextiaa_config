@@ -40,13 +40,13 @@ export function PublicAccessDialog({ website, isOpen, onClose }: PublicAccessDia
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-[#F1F3F5] shadow-none rounded">
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-[#F1F3F5] shadow-none rounded-none">
         <div className="bg-[#F8F9FA] p-6 border-b border-[#F1F3F5] flex items-center gap-4">
           <div className="h-10 w-10 bg-white rounded border border-[#F1F3F5] flex items-center justify-center">
             <Code2 className="h-5 w-5 text-[#212529]" />
           </div>
           <div>
-            <DialogTitle className="text-lg font-semibold text-[#212529]">API Integration</DialogTitle>
+            <DialogTitle className="text-lg font-medium text-[#212529]">API Integration</DialogTitle>
             <DialogDescription className="text-xs font-medium text-[#868E96] mt-0.5">
               Access your platform data programmatically.
             </DialogDescription>
@@ -77,11 +77,11 @@ export function PublicAccessDialog({ website, isOpen, onClose }: PublicAccessDia
 
           <div className="bg-[#212529] rounded p-4 space-y-3">
             <div className="flex items-center justify-between border-b border-white/10 pb-2">
-               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#ADB5BD]">Request example</span>
+               <span className="text-[10px] font-medium uppercase tracking-wider text-[#ADB5BD]">Request example</span>
                <div className="flex gap-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-[#495057]" />
-                  <div className="h-1.5 w-1.5 rounded-full bg-[#495057]" />
-                  <div className="h-1.5 w-1.5 rounded-full bg-[#495057]" />
+                  <div className="h-1.5 w-1.5 rounded bg-[#495057]" />
+                  <div className="h-1.5 w-1.5 rounded bg-[#495057]" />
+                  <div className="h-1.5 w-1.5 rounded bg-[#495057]" />
                </div>
             </div>
             <pre className="text-[11px] font-mono text-emerald-400 overflow-x-auto whitespace-pre-wrap leading-relaxed">
@@ -96,7 +96,7 @@ console.log(data.teamMembers); // team members array`}
 
           <Button 
             variant="outline" 
-            className="w-full h-8 rounded border-[#F1F3F5] font-semibold text-xs text-[#495057] hover:bg-[#F8F9FA] gap-2 shadow-none" 
+            className="w-full h-8 rounded border-[#F1F3F5] font-medium text-xs text-[#495057] hover:bg-[#F8F9FA] gap-2 shadow-none" 
             asChild
           >
             <a href={publicUrl} target="_blank" rel="noopener noreferrer">

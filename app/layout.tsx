@@ -6,13 +6,13 @@ import { Header } from "@/components/layout/Header";
 import { Toaster } from "sonner";
 
 const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500"],
   subsets: ["latin"],
   variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
-  title: "Website Master Admin",
+  title: "Nextiaa Admin",
   description: "Manage all your platforms from one place",
 };
 
@@ -27,10 +27,10 @@ export default function RootLayout({
       className={`${poppins.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-foreground font-sans">
+      <body className="min-h-full flex flex-col bg-white text-foreground text-sm font-sans">
         <Providers>
           <Header />
-          <main className="flex-1 flex flex-col">
+          <main className="flex flex-1 flex-col">
             <div className="container mx-auto flex-1 px-4">
               {children}
             </div>

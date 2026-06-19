@@ -69,7 +69,7 @@ export function LoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel className="text-xs font-medium text-[#868E96]">
+              <FormLabel className="text-xs font-medium text-muted-foreground">
                 Email address
               </FormLabel>
               <FormControl>
@@ -88,7 +88,7 @@ export function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel className="text-xs font-medium text-[#868E96]">
+              <FormLabel className="text-xs font-medium text-muted-foreground">
                 Security key
               </FormLabel>
               <FormControl>
@@ -106,7 +106,7 @@ export function LoginForm() {
         <Button 
           type="submit" 
           disabled={isLoading} 
-          className="w-full h-8 rounded font-semibold bg-[#212529] text-white hover:bg-[#343A40] transition-all active:scale-[0.98] mt-4 shadow-none text-xs"
+          className="w-full h-8 rounded font-medium mt-4 shadow-none text-xs"
         >
           {isLoading ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />

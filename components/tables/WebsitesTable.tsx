@@ -55,7 +55,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
           <Monitor className="h-6 w-6 text-[#CED4DA]" />
         </div>
         <div className="space-y-0.5">
-          <h3 className="text-sm font-semibold text-[#212529]">no platforms found</h3>
+          <h3 className="text-sm font-medium text-[#212529]">no platforms found</h3>
           <p className="text-xs text-[#868E96] max-w-xs">try adjusting your search or filters.</p>
         </div>
       </div>
@@ -64,16 +64,16 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
 
   return (
     <>
-      <div className="rounded overflow-hidden border border-[#F1F3F5] bg-white">
+      <div className="rounded-lg overflow-hidden border border-[#F1F3F5] bg-white">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader className="bg-white">
               <TableRow className="hover:bg-transparent border-b-[#F1F3F5]">
-            <TableHead className="py-4 px-6 text-sm font-medium text-[#212529]">platform</TableHead>
-            <TableHead className="text-sm font-medium text-[#212529] hidden md:table-cell">url</TableHead>
-            <TableHead className="text-sm font-medium text-[#212529]">status</TableHead>
-            <TableHead className="text-sm font-medium text-[#212529] hidden lg:table-cell">slug</TableHead>
-            <TableHead className="text-right px-6 text-sm font-medium text-[#212529]">control</TableHead>
+            <TableHead className="py-4 px-6">Platform</TableHead>
+            <TableHead className="hidden md:table-cell">URL</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="hidden lg:table-cell">Slug</TableHead>
+            <TableHead className="text-right px-6">Control</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -85,7 +85,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                         <Monitor className="h-4 w-4 text-[#495057]" />
                       </div>
                       <div className="flex flex-col text-left">
-                        <span className="font-semibold text-[#212529] text-sm">{website.name.toLowerCase()}</span>
+                        <span className="font-medium text-[#212529] text-sm">{website.name.toLowerCase()}</span>
                         <span className="text-[10px] text-[#ADB5BD] font-medium">id: {website.id.substring(0, 8)}</span>
                       </div>
                     </div>
@@ -105,7 +105,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                     <Badge 
                       variant="outline" 
                       className={cn(
-                        "rounded px-2 py-0.5 text-[10px] font-semibold border-none shadow-none",
+                        "rounded px-2 py-0.5 text-[10px] font-medium border-none shadow-none",
                         website.status === 'active' ? "bg-emerald-50 text-emerald-600" : 
                         website.status === 'inactive' ? "bg-slate-50 text-slate-500" : "bg-rose-50 text-rose-500"
                       )}
@@ -114,7 +114,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
-                    <code className="text-[11px] font-semibold px-2 py-0.5 bg-[#F8F9FA] rounded border border-[#F1F3F5] text-[#495057]">
+                    <code className="text-[11px] font-medium px-2 py-0.5 bg-[#F8F9FA] rounded border border-[#F1F3F5] text-[#495057]">
                       {website.slug}
                     </code>
                   </TableCell>
@@ -123,7 +123,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                        <Button 
                         variant="ghost" 
                         size="sm" 
-                        className="h-8 px-3 rounded font-semibold text-xs gap-2 hover:bg-[#F1F3F5]"
+                        className="h-8 px-3 rounded font-medium text-xs gap-2 hover:bg-[#F1F3F5]"
                         asChild
                        >
                          <Link href={`/dashboard/websites/${website.id}/sections`}>
@@ -139,16 +139,16 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-52 rounded border-[#F1F3F5] shadow-lg p-1.5 bg-white">
-                          <DropdownMenuLabel className="px-3 py-2 text-[10px] font-semibold text-[#ADB5BD]">integrations</DropdownMenuLabel>
+                          <DropdownMenuLabel className="px-3 py-2 text-[10px] font-medium text-[#ADB5BD]">integrations</DropdownMenuLabel>
                           <DropdownMenuItem className="rounded py-2 cursor-pointer focus:bg-[#FAFAFA]" onClick={() => setViewingApi(website)}>
                             <Code2 className="mr-3 h-4 w-4 text-[#868E96]" />
-                            <span className="font-semibold text-sm text-[#495057]">api details</span>
+                            <span className="font-medium text-sm text-[#495057]">api details</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator className="bg-[#F1F3F5]" />
-                          <DropdownMenuLabel className="px-3 py-2 text-[10px] font-semibold text-[#ADB5BD]">settings</DropdownMenuLabel>
+                          <DropdownMenuLabel className="px-3 py-2 text-[10px] font-medium text-[#ADB5BD]">settings</DropdownMenuLabel>
                           <DropdownMenuItem className="rounded py-2 cursor-pointer focus:bg-[#FAFAFA]" onClick={() => setEditingWebsite(website)}>
                             <Edit className="mr-3 h-4 w-4 text-[#868E96]" />
-                            <span className="font-semibold text-sm text-[#495057]">edit platform</span>
+                            <span className="font-medium text-sm text-[#495057]">edit platform</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator className="bg-[#F1F3F5]" />
                           <DropdownMenuItem 
@@ -156,7 +156,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                             onClick={() => deleteMutation.mutate(website.id)}
                           >
                             <Trash2 className="mr-3 h-4 w-4" />
-                            <span className="font-semibold text-sm">remove platform</span>
+                            <span className="font-medium text-sm">remove platform</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
 import { SectionForm } from '../forms/SectionForm';
@@ -20,26 +19,24 @@ interface SectionDialogProps {
 export function SectionDialog({ websiteId, isOpen, onClose, initialData }: SectionDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden gap-0 border border-[#F1F3F5] shadow-none bg-white rounded">
-        <div className="p-6 md:p-8 border-b border-[#F1F3F5] bg-[#F8F9FA]">
-          <DialogTitle className="text-xl font-semibold tracking-tight text-[#212529]">
+      <DialogContent className="sm:max-w-[640px] p-8 gap-6 border shadow-none bg-white rounded-none">
+        <div>
+          <DialogTitle className="text-xl font-medium tracking-tight">
             {initialData ? 'Edit section' : 'Add new section'}
           </DialogTitle>
-          <DialogDescription className="text-[#868E96] mt-1 text-sm font-medium">
+          <DialogDescription className="mt-1 text-sm font-medium">
             {initialData 
               ? `Update configuration for ${initialData.title}` 
               : 'Enter details to create a new content block'}
           </DialogDescription>
         </div>
-        <div className="p-6 md:p-8 bg-white">
-          <SectionForm 
-            websiteId={websiteId} 
-            initialData={initialData}
-            onSuccess={() => {
-              onClose();
-            }} 
-          />
-        </div>
+        <SectionForm 
+          websiteId={websiteId} 
+          initialData={initialData}
+          onSuccess={() => {
+            onClose();
+          }} 
+        />
       </DialogContent>
     </Dialog>
   );

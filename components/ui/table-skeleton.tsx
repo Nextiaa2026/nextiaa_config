@@ -2,7 +2,7 @@ import { Skeleton } from "./skeleton";
 
 export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number, columns?: number }) {
   return (
-    <div className="rounded overflow-hidden border border-[#F1F3F5] bg-white">
+    <div className="rounded-lg overflow-hidden border border-[#F1F3F5] bg-white">
       <div className="border-b border-[#F1F3F5] px-6 py-4 flex gap-4">
         {Array.from({ length: columns }).map((_, i) => (
           <Skeleton key={i} className="h-4 w-24" />

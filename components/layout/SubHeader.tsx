@@ -19,7 +19,7 @@ export function SubHeader({ websiteId }: SubHeaderProps) {
   ];
 
   return (
-    <div className="w-full bg-white border-b border-[#F1F3F5] overflow-x-auto no-scrollbar">
+    <div className="w-full bg-white border-b overflow-x-auto no-scrollbar">
       <div className="container mx-auto flex h-12 items-center gap-6 px-4 min-w-max">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
@@ -28,10 +28,10 @@ export function SubHeader({ websiteId }: SubHeaderProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-2 text-[13px] font-semibold transition-all h-full relative whitespace-nowrap',
-                isActive 
-                  ? 'text-[#212529] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-[#212529]' 
-                  : 'text-[#868E96] hover:text-[#212529]'
+                'flex items-center gap-2 text-[13px] font-medium transition-all h-full relative whitespace-nowrap',
+                isActive
+                  ? 'text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary'
+                  : 'text-muted-foreground hover:text-primary'
               )}
             >
               <item.icon className="h-3.5 w-3.5" />

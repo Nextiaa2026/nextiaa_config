@@ -22,8 +22,15 @@ import { TeamMemberResponse } from '@/lib/types';
 const teamMemberSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   role: z.string().min(1, 'Role is required'),
+  email: z.string().email('Invalid email').optional().or(z.literal('')),
+  phone: z.string().optional(),
+  department: z.string().optional(),
+  location: z.string().optional(),
   bio: z.string().optional(),
   image: z.string().optional(),
+  linkedIn: z.string().url('Invalid URL').optional().or(z.literal('')),
+  twitter: z.string().url('Invalid URL').optional().or(z.literal('')),
+  github: z.string().url('Invalid URL').optional().or(z.literal('')),
 });
 
 type TeamMemberFormData = z.infer<typeof teamMemberSchema>;
@@ -43,16 +50,31 @@ export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMember
     defaultValues: {
       name: initialData?.name || '',
       role: initialData?.role || '',
+      email: initialData?.email || '',
+      phone: initialData?.phone || '',
+      department: initialData?.department || '',
+      location: initialData?.location || '',
       bio: initialData?.bio || '',
       image: initialData?.image || '',
+      linkedIn: initialData?.linkedIn || '',
+      twitter: initialData?.twitter || '',
+      github: initialData?.github || '',
     },
   });
 
   const onSubmit = async (values: TeamMemberFormData) => {
+    const payload = {
+      ...values,
+      email: values.email || undefined,
+      linkedIn: values.linkedIn || undefined,
+      twitter: values.twitter || undefined,
+      github: values.github || undefined,
+    };
+
     if (initialData) {
-      await updateMutation.mutateAsync({ id: initialData.id, ...values });
+      await updateMutation.mutateAsync({ id: initialData.id, ...payload });
     } else {
-      await createMutation.mutateAsync(values);
+      await createMutation.mutateAsync(payload);
     }
     onSuccess?.();
   };
@@ -68,10 +90,10 @@ export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMember
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <ImageUpload 
-                  value={field.value} 
-                  onChange={field.onChange} 
-                  label="Profile portrait" 
+                <ImageUpload
+                  value={field.value}
+                  onChange={field.onChange}
+                  label="Profile portrait"
                 />
               </FormControl>
               <FormMessage />
@@ -85,7 +107,7 @@ export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMember
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs font-medium text-[#868E96]">Full name</FormLabel>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Full name</FormLabel>
                 <FormControl>
                   <Input placeholder="John Doe" {...field} />
                 </FormControl>
@@ -98,9 +120,61 @@ export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMember
             name="role"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs font-medium text-[#868E96]">Role / Job title</FormLabel>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Role / Job title</FormLabel>
                 <FormControl>
                   <Input placeholder="CEO & Founder" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="john@example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Phone</FormLabel>
+                <FormControl>
+                  <Input placeholder="+1 555 000 0000" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="department"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Department</FormLabel>
+                <FormControl>
+                  <Input placeholder="Engineering" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Location</FormLabel>
+                <FormControl>
+                  <Input placeholder="Paris, France" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,12 +187,12 @@ export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMember
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-xs font-medium text-[#868E96]">Biography</FormLabel>
+              <FormLabel className="text-xs font-medium text-muted-foreground">Biography</FormLabel>
               <FormControl>
-                <Textarea 
-                  placeholder="Short professional bio..." 
-                  {...field} 
-                  className="min-h-[100px] rounded bg-[#F8F9FA] border-[#F1F3F5] text-sm placeholder:text-[#CED4DA] focus-visible:border-[#CED4DA]" 
+                <Textarea
+                  placeholder="Short professional bio..."
+                  {...field}
+                  className="min-h-[100px] bg-white text-sm"
                 />
               </FormControl>
               <FormMessage />
@@ -126,11 +200,53 @@ export function TeamMemberForm({ websiteId, initialData, onSuccess }: TeamMember
           )}
         />
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <FormField
+            control={form.control}
+            name="linkedIn"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">LinkedIn</FormLabel>
+                <FormControl>
+                  <Input placeholder="https://linkedin.com/in/..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="twitter"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">Twitter / X</FormLabel>
+                <FormControl>
+                  <Input placeholder="https://x.com/..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="github"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs font-medium text-muted-foreground">GitHub</FormLabel>
+                <FormControl>
+                  <Input placeholder="https://github.com/..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <div className="flex justify-end pt-4">
-          <Button 
-            type="submit" 
-            disabled={isLoading} 
-            className="px-8 rounded font-semibold text-xs shadow-none"
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="px-8 font-medium text-xs shadow-none"
           >
             {isLoading && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
             {initialData ? 'Save changes' : 'Save profile'}

@@ -164,7 +164,7 @@ export function WebsiteForm({ initialData, onSuccess }: WebsiteFormProps) {
           <Button 
             type="submit" 
             disabled={isLoading} 
-            className="font-semibold text-xs px-8 shadow-none"
+            className="font-medium text-xs px-8 shadow-none"
           >
             {isLoading && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
             {initialData ? 'Save changes' : 'Create platform'}
