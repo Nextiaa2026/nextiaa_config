@@ -23,7 +23,7 @@ export function TeamMembersTable({ members, onEdit, onDelete }: TeamMembersTable
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-4 bg-white border border-[#F1F3F5] rounded-lg">
         <Monitor className="h-10 w-10 text-[#CED4DA]" />
-        <p className="text-[#868E96] font-medium text-sm">aucun membre d'équipe trouvé.</p>
+        <p className="text-[#868E96] font-medium text-sm">aucun membre d&apos;équipe trouvé.</p>
       </div>
     );
   }

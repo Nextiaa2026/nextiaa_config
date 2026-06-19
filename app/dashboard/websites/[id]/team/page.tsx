@@ -119,7 +119,7 @@ export default function TeamPage() {
             </div>
             <div className="text-center">
               <p className="font-medium text-xs text-[#495057]">Ajouter un nouveau membre</p>
-              <p className="text-[10px] text-[#ADB5BD] mt-1 font-medium">Rejoindre l'équipe</p>
+              <p className="text-[10px] text-[#ADB5BD] mt-1 font-medium">Rejoindre l&apos;équipe</p>
             </div>
           </button>
         </div>

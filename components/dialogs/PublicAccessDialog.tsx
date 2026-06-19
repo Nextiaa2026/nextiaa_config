@@ -4,13 +4,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Copy, Check, Code2, Globe, Link as LinkIcon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { WebsiteResponse } from '@/lib/types';
 
@@ -22,11 +21,9 @@ interface PublicAccessDialogProps {
 
 export function PublicAccessDialog({ website, isOpen, onClose }: PublicAccessDialogProps) {
   const [copied, setCopied] = useState(false);
-  const [origin, setOrigin] = useState('');
-
-  useEffect(() => {
-    setOrigin(window.location.origin);
-  }, []);
+  const [origin] = useState(() =>
+    typeof window !== 'undefined' ? window.location.origin : ''
+  );
 
   const publicUrl = website ? `${origin}/api/public/websites/${website.slug}` : '';
 

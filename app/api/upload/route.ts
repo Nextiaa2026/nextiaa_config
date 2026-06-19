@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
+import type { UploadApiResponse } from 'cloudinary';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
@@ -20,24 +21,23 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const result = await new Promise((resolve, reject) => {
+    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
       cloudinary.uploader.upload_stream(
         {
           folder: 'website_admin',
           resource_type: 'auto',
         },
-        (error, result) => {
+        (error, uploadResult) => {
           if (error) reject(error);
-          else resolve(result);
+          else if (uploadResult) resolve(uploadResult);
+          else reject(new Error('Upload failed'));
         }
       ).end(buffer);
     });
 
-    const uploadResult = result as any; // Cloudinary result type is complex, using any here sparingly for the result object
-
     return NextResponse.json({
       success: true,
-      url: uploadResult.secure_url,
+      url: result.secure_url,
     });
   } catch (error) {
     console.error('Upload error:', error);
