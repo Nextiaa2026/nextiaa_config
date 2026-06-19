@@ -26,7 +26,7 @@ export function SectionsTable({ sections, onEdit, onDelete, onToggleVisibility }
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-4 bg-white border border-[#F1F3F5] rounded">
         <Layers className="h-10 w-10 text-[#CED4DA]" />
-        <p className="text-[#868E96] font-medium text-sm">no sections found.</p>
+        <p className="text-[#868E96] font-medium text-sm">aucune section trouvée.</p>
       </div>
     );
   }
@@ -39,7 +39,7 @@ export function SectionsTable({ sections, onEdit, onDelete, onToggleVisibility }
             <TableRow className="hover:bg-transparent border-b-[#F1F3F5]">
               <TableHead className="py-4 px-6 text-sm font-medium text-[#212529]">structure</TableHead>
               <TableHead className="text-sm font-medium text-[#212529]">type</TableHead>
-              <TableHead className="text-sm font-medium text-[#212529]">state</TableHead>
+              <TableHead className="text-sm font-medium text-[#212529]">état</TableHead>
               <TableHead className="text-right px-6 text-sm font-medium text-[#212529]">actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -56,7 +56,7 @@ export function SectionsTable({ sections, onEdit, onDelete, onToggleVisibility }
                     </div>
                     <div className="flex flex-col text-left">
                       <span className="font-semibold text-[#212529] text-sm">{section.title.toLowerCase()}</span>
-                      <span className="text-[10px] text-[#ADB5BD] font-medium">{section.subtitle?.toLowerCase() || 'no subtitle'}</span>
+                      <span className="text-[10px] text-[#ADB5BD] font-medium">{section.subtitle?.toLowerCase() || 'aucun sous-titre'}</span>
                     </div>
                   </div>
                 </TableCell>
@@ -69,7 +69,7 @@ export function SectionsTable({ sections, onEdit, onDelete, onToggleVisibility }
                   <div className="flex items-center gap-2">
                     <div className={cn("h-1.5 w-1.5 rounded-full", section.isActive ? "bg-emerald-500" : "bg-slate-300")} />
                     <span className="text-[11px] font-semibold text-[#868E96]">
-                      {section.isActive ? 'live' : 'draft'}
+                      {section.isActive ? 'en ligne' : 'brouillon'}
                     </span>
                   </div>
                 </TableCell>

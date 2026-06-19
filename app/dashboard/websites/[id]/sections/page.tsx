@@ -36,34 +36,34 @@ export default function SectionsPage() {
 
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between gap-4 bg-white border border-[#F1F3F5] p-3 md:p-4 rounded">
-        <div className="flex gap-1.5 bg-[#F8F9FA] p-1 rounded">
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white border border-[#F1F3F5] p-2 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between z-50">
+        <div className="flex gap-1 bg-[#F8F9FA] p-1 rounded-full">
           <Button 
             variant={viewMode === 'grid' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="rounded h-8 px-2 md:px-3 shadow-none text-xs font-semibold"
+            className="rounded-full h-9 px-4 shadow-none text-xs font-semibold"
             onClick={() => setViewMode('grid')}
           >
-            <LayoutGrid className="h-4 w-4 md:mr-2" />
-            <span className="hidden md:inline">Grid</span>
+            <LayoutGrid className="h-4 w-4 mr-2" />
+            <span className="hidden sm:inline">Grille</span>
           </Button>
           <Button 
             variant={viewMode === 'table' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="rounded h-8 px-2 md:px-3 shadow-none text-xs font-semibold"
+            className="rounded-full h-9 px-4 shadow-none text-xs font-semibold"
             onClick={() => setViewMode('table')}
           >
-            <List className="h-4 w-4 md:mr-2" />
-            <span className="hidden md:inline">Table</span>
+            <List className="h-4 w-4 mr-2" />
+            <span className="hidden sm:inline">Tableau</span>
           </Button>
         </div>
 
         <Button 
           onClick={() => setDialogState({ isOpen: true })}
-          className="h-8 px-3 md:px-6 rounded font-semibold bg-[#212529] text-white transition-all active:scale-[0.98] text-xs md:text-sm"
+          className="h-10 px-5 rounded-full font-semibold bg-[#212529] text-white transition-all active:scale-[0.98] text-sm flex items-center"
         >
-          <Plus className="h-4 w-4 md:mr-2" />
-          <span className="hidden md:inline">Add section</span>
+          <span className="hidden sm:inline mr-2">Ajouter</span>
+          <Plus className="h-5 w-5" />
         </Button>
       </div>
 
@@ -76,7 +76,7 @@ export default function SectionsPage() {
                   <Layers className="h-6 w-6 text-[#495057]" />
                 </div>
                 <Badge variant="outline" className={cn("rounded font-semibold text-[10px] border-none shadow-none", section.isActive ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-500")}>
-                  {section.isActive ? "Live" : "Draft"}
+                  {section.isActive ? "En ligne" : "Brouillon"}
                 </Badge>
                 
                 <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -97,7 +97,7 @@ export default function SectionsPage() {
                   <p className="text-[#868E96] font-medium text-[11px]">{section.type}</p>
                 </div>
                 <CardDescription className="text-xs mt-3 line-clamp-2 leading-relaxed text-[#495057] font-medium">
-                  {section.subtitle || "No subtitle provided."}
+                  {section.subtitle || "Aucun sous-titre fourni."}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -111,8 +111,8 @@ export default function SectionsPage() {
               <Plus className="h-5 w-5 text-[#CED4DA]" />
             </div>
             <div className="text-center">
-              <p className="font-semibold text-xs text-[#495057]">Add new section</p>
-              <p className="text-[10px] text-[#ADB5BD] mt-1 font-medium">Build your layout</p>
+              <p className="font-semibold text-xs text-[#495057]">Ajouter une section</p>
+              <p className="text-[10px] text-[#ADB5BD] mt-1 font-medium">Construisez votre mise en page</p>
             </div>
           </button>
         </div>
