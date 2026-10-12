@@ -37,7 +37,7 @@ export function PublicAccessDialog({ website, isOpen, onClose }: PublicAccessDia
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-[#F1F3F5] shadow-none rounded-none">
+      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden border-[#F1F3F5]">
         <div className="bg-[#F8F9FA] p-6 border-b border-[#F1F3F5] flex items-center gap-4">
           <div className="h-10 w-10 bg-white rounded border border-[#F1F3F5] flex items-center justify-center">
             <Code2 className="h-5 w-5 text-[#212529]" />

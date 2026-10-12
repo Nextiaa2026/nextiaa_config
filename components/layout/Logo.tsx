@@ -2,19 +2,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
+type LogoVariant = 'icon' | 'wordmark' | 'wordmark-light';
+
 type LogoProps = {
   className?: string;
   href?: string | null;
+  variant?: LogoVariant;
 };
 
-export function Logo({ className, href = '/' }: LogoProps) {
+const sources: Record<LogoVariant, { src: string; width: number; height: number }> = {
+  icon: { src: '/brand/nextiaa-icon.png', width: 256, height: 227 },
+  wordmark: { src: '/brand/nextiaa-wordmark.png', width: 720, height: 289 },
+  'wordmark-light': { src: '/brand/nextiaa-wordmark-light.png', width: 720, height: 289 },
+};
+
+export function Logo({ className, href = '/', variant = 'wordmark' }: LogoProps) {
+  const { src, width, height } = sources[variant];
   const image = (
     <Image
-      src="/nextiaa-mark.png"
+      src={src}
       alt="Nextiaa"
-      width={48}
-      height={48}
-      className={cn('h-11 w-11 object-contain', className)}
+      width={width}
+      height={height}
+      className={cn('h-8 w-auto object-contain', className)}
       priority
     />
   );

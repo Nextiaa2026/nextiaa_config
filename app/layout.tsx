@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
-import { Header } from "@/components/layout/Header";
-import { Toaster } from "sonner";
 
 const poppins = Poppins({
   weight: ["300", "400", "500"],
@@ -14,6 +12,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Nextiaa Admin",
   description: "Manage all your platforms from one place",
+  icons: { icon: "/brand/nextiaa-icon.png" },
 };
 
 export default function RootLayout({
@@ -27,16 +26,8 @@ export default function RootLayout({
       className={`${poppins.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-foreground text-sm font-sans">
-        <Providers>
-          <Header />
-          <main className="flex flex-1 flex-col">
-            <div className="container mx-auto flex-1 px-4">
-              {children}
-            </div>
-          </main>
-          <Toaster position="top-center" richColors />
-        </Providers>
+      <body className="min-h-full bg-white text-foreground text-sm font-sans">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

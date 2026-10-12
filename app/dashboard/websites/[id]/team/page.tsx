@@ -24,7 +24,7 @@ export default function TeamPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto py-8 px-4">
+      <div className="max-w-7xl mx-auto py-6 px-4 md:px-8">
         <TableSkeleton rows={6} columns={4} />
       </div>
     );
@@ -35,9 +35,9 @@ export default function TeamPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-500">
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white border border-[#F1F3F5] p-2 rounded shadow-[0_8px_30px_rgb(0,0,0,0.08)] flex items-center justify-between z-50">
-        <div className="flex gap-1 bg-[#F8F9FA] p-1 rounded">
+    <div className="max-w-7xl mx-auto py-6 px-4 md:px-8 space-y-8 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between gap-4 bg-white border border-border p-2 rounded-xl">
+        <div className="flex gap-1 bg-[#F8F9FA] p-1 rounded-lg">
           <Button 
             variant={viewMode === 'grid' ? 'secondary' : 'ghost'} 
             size="sm" 

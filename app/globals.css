@@ -36,37 +36,50 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-brand: #ff7100;
+  --color-brand-50: #fff4eb;
+  --color-brand-100: #ffe4cc;
+  --color-brand-200: #ffc999;
+  --color-brand-500: #ff7100;
+  --color-brand-600: #e66500;
+  --color-brand-700: #b84f00;
+
+  --color-ink: #0c0c0e;
+  --color-ink-800: #151518;
+  --color-ink-700: #1d1d21;
+  --color-ink-600: #2a2a30;
+
   --radius-xs: 2px;
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 0.5rem;
-  --radius-xl: 2px;
-  --radius-2xl: 2px;
-  --radius-3xl: 2px;
-  --radius-4xl: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.68 0.19 45);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0.02 45);
-  --secondary-foreground: oklch(0.35 0.1 45);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0.03 45);
-  --accent-foreground: oklch(0.45 0.14 45);
+  --background: #ffffff;
+  --foreground: #0c0c0e;
+  --card: #ffffff;
+  --card-foreground: #0c0c0e;
+  --popover: #ffffff;
+  --popover-foreground: #0c0c0e;
+  --primary: #ff7100;
+  --primary-foreground: #ffffff;
+  --secondary: #fff4eb;
+  --secondary-foreground: #b84f00;
+  --muted: #f6f6f7;
+  --muted-foreground: #6b6b74;
+  --accent: #fff4eb;
+  --accent-foreground: #b84f00;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.68 0.19 45);
-  --radius: 2px;
+  --border: #ececef;
+  --input: #e4e4e8;
+  --ring: #ff7100;
+  --radius: 8px;
 }
 
 .dark {
@@ -102,4 +115,16 @@
   .font-bold {
     font-weight: 500;
   }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a30 transparent;
 }

@@ -19,7 +19,7 @@ interface TeamMemberDialogProps {
 export function TeamMemberDialog({ websiteId, isOpen, onClose, initialData }: TeamMemberDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[640px] p-8 gap-6 border shadow-none bg-white rounded-none">
+      <DialogContent className="sm:max-w-[640px] p-8 gap-6 border bg-white">
         <div>
           <DialogTitle className="text-xl font-medium tracking-tight">
             {initialData ? 'Edit profile' : 'Add new member'}

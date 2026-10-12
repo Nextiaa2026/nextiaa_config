@@ -19,7 +19,7 @@ interface ServiceDialogProps {
 export function ServiceDialog({ websiteId, isOpen, onClose, initialData }: ServiceDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[640px] p-8 gap-6 border shadow-none bg-white rounded-none">
+      <DialogContent className="sm:max-w-[640px] p-8 gap-6 border bg-white">
         <div>
           <DialogTitle className="text-xl font-medium tracking-tight">
             {initialData ? 'Edit service' : 'Add new service'}

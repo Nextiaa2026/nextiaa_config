@@ -9,7 +9,7 @@ export default function CreateWebsitePage() {
   const router = useRouter();
 
   return (
-    <div className="py-8 max-w-2xl space-y-8">
+    <div className="mx-auto max-w-2xl space-y-8 px-4 py-8 md:px-8">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"

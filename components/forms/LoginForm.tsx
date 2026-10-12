@@ -106,7 +106,7 @@ export function LoginForm() {
         <Button 
           type="submit" 
           disabled={isLoading} 
-          className="w-full h-8 rounded font-medium mt-4 shadow-none text-xs"
+          className="w-full h-10 rounded-xl font-medium mt-6 text-sm shadow-lg shadow-brand/25"
         >
           {isLoading ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />

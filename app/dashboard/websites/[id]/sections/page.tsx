@@ -22,7 +22,7 @@ export default function SectionsPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto py-8 px-4">
+      <div className="max-w-7xl mx-auto py-6 px-4 md:px-8">
         <TableSkeleton rows={6} columns={4} />
       </div>
     );
@@ -33,7 +33,7 @@ export default function SectionsPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-500">
+    <div className="max-w-7xl mx-auto py-6 px-4 md:px-8 space-y-8 animate-in fade-in duration-500">
       <div className="flex justify-end">
         <Button
           onClick={() => setDialogState({ isOpen: true })}

@@ -30,7 +30,7 @@ export default function ServicesPage() {
 
   if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto py-8 px-4">
+      <div className="max-w-7xl mx-auto py-6 px-4 md:px-8">
         <TableSkeleton rows={6} columns={4} />
       </div>
     );
@@ -41,9 +41,9 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between gap-4 bg-white border border-[#F1F3F5] p-3 md:p-4 rounded">
-        <div className="flex gap-1.5 bg-[#F8F9FA] p-1 rounded">
+    <div className="max-w-7xl mx-auto py-6 px-4 md:px-8 space-y-8 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between gap-4 bg-white border border-border p-2 rounded-xl">
+        <div className="flex gap-1 bg-[#F8F9FA] p-1 rounded-lg">
           <Button 
             variant={viewMode === 'grid' ? 'secondary' : 'ghost'} 
             size="sm" 

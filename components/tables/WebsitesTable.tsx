@@ -33,7 +33,7 @@ import { WebsiteDialog } from '@/components/dialogs/WebsiteDialog';
 import { PublicAccessDialog } from '@/components/dialogs/PublicAccessDialog';
 import { WebsiteResponse } from '@/lib/types';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn, getHostname } from '@/lib/utils';
 import { TableSkeleton } from '@/components/ui/table-skeleton';
 
 interface WebsitesTableProps { status: string; search: string; }
@@ -64,7 +64,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
 
   return (
     <>
-      <div className="rounded-lg overflow-hidden border border-[#F1F3F5] bg-white">
+      <div className="rounded-2xl overflow-hidden border border-border bg-white">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader className="bg-white">
@@ -97,7 +97,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                       rel="noopener noreferrer" 
                       className="flex items-center gap-2 text-sm font-medium text-[#868E96] hover:text-[#212529] transition-colors"
                     >
-                      {new URL(website.url).hostname}
+                      {getHostname(website.url)}
                       <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
                   </TableCell>
@@ -126,7 +126,7 @@ export function WebsitesTable({ status, search }: WebsitesTableProps) {
                         className="h-8 px-3 rounded font-medium text-xs gap-2 hover:bg-[#F1F3F5]"
                         asChild
                        >
-                         <Link href={`/dashboard/websites/${website.id}/sections`}>
+                         <Link href={`/dashboard/websites/${website.id}`}>
                            manage
                            <ChevronRight className="h-3 w-3" />
                          </Link>
